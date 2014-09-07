@@ -5,3 +5,15 @@ if [ -z "$1" ] ; then echo " Usage: add <host> " ; exit 1 ; fi
 
 HOST=$1;
 
+
+#create host dir
+HOST_DIR="$WEBSITES_DIR/$HOST"
+echo $HOST_DIR
+if [ -d $HOST_DIR ]; then
+    echo " Host already exist: $HOST "
+    exit 1
+fi
+mkdir $HOST_DIR
+
+#copy files to host dir
+cp -R ./template/host/* $WEBSITES_DIR/$HOST/
