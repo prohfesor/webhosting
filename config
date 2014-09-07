@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#Websites directory
+WEBSITES_DIR="/var/www/vhosts"
+
+#Chown for host dir
+CHOWN_HOST=":web"
+
+#Chown for www dir
+CHOWN_WWW=":web"
