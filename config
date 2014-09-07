@@ -4,10 +4,13 @@
 WEBSITES_DIR="/var/www/vhosts"
 
 #Chown for host dir
-CHOWN_HOST=":web"
+CHOWN_HOST="prohfesor:web"
 
-#Chown for www dir
-CHOWN_WWW=":web"
+#Chmod for host dir
+CHMOD_HOST='g+w'
 
 #Server config dir
 SERVER_CONF_DIR="/etc/httpd/conf.d"
+
+#Server restart command
+SERVER_RESTART="service httpd restart"
