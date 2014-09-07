@@ -8,3 +8,6 @@ CHOWN_HOST=":web"
 
 #Chown for www dir
 CHOWN_WWW=":web"
+
+#Server config dir
+SERVER_CONF_DIR="/etc/httpd/conf.d"
