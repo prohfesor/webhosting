@@ -14,30 +14,7 @@ fi
 echo " Creating host directory: $HOST_DIR"
 mkdir $HOST_DIR
 
-#copy files to host dir
-cp -R ./template/host/* $HOST_DIR/
-
-#fill files contents
-grep -rl "\$HOST" $HOST_DIR | xargs sed -i s@"\$HOST"@$HOST@g
-
-#chown host dir
-echo " Change owner on host dir to: $CHOWN_HOST"
-chown -R $CHOWN_HOST $HOST_DIR
-
-#chmod host dir
-echo " Change permissions on host dir to: $CHMOD_HOST"
-chmod -R $CHMOD_HOST $HOST_DIR
-
-#add config file to webserver
-SERVER_CONF_FILE="$SERVER_CONF_DIR/$HOST.conf"
-if [ -f $SERVER_CONF_FILE ]; then
-    echo " Server conf $HOST.conf already exists!"
-else
-    echo " Adding config to server: $SERVER_CONF_FILE"
-    cp ./template/server/host.conf $SERVER_CONF_FILE
-fi
-sed -i -e s@"\$HOST"@$HOST@g $SERVER_CONF_FILE
-sed -i -e s@"\$WEBSITES_DIR"@$WEBSITES_DIR@g $SERVER_CONF_FILE
+./process "$1"
 
 #restart server
 echo " Restart server"
