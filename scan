@@ -1,0 +1,23 @@
+#!/bin/bash
+c=${0%/*}/config ; source "$c" ; if [ $? -ne 0 ] ; then echo "Error: no config file $c" 1>&2 ; exit 1 ; fi
+
+#scan for directories
+for DIR in $WEBSITES_DIR/*; do
+    if [ -d "${DIR}" ]; then
+	VHOST=${DIR##*/}
+        printf "Checking ${VHOST} "
+        if [ ! -f "${DIR}/conf/vhost.conf" ]; then
+	    echo " [ Process! ]"
+	    NEED_RESTART=true
+	    ./process "${VHOST}"
+	else
+	    echo " [ OK ]"
+        fi
+    fi
+done
+
+if [ $NEED_RESTART ]; then
+    #restart server
+    echo " Restart server"
+    ${SERVER_RESTART}
+fi

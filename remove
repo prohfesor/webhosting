@@ -1,0 +1,28 @@
+#!/bin/bash
+c=${0%/*}/config ; source "$c" ; if [ $? -ne 0 ] ; then echo "Error: no config file $c" 1>&2 ; exit 1 ; fi
+
+if [ -z "$1" ] ; then echo " Usage: add <host> " ; exit 1 ; fi
+
+HOST=$1;
+
+#create host dir
+HOST_DIR="$WEBSITES_DIR/$HOST"
+if [ -d $HOST_DIR ]; then
+    echo " Deleting host $HOST"
+    rm -rf $HOST_DIR
+else 
+    echo " Host dir not found! "
+fi
+
+#remove server conf
+SERVER_CONF_FILE="$SERVER_CONF_DIR/$HOST.conf"
+if [ -f $SERVER_CONF_FILE ]; then
+    echo " Removing server configuration $HOST.conf "
+    rm -f $SERVER_CONF_FILE
+else
+    echo " Server conf not found! "
+fi
+
+#restart server
+echo " Restart server"
+${SERVER_RESTART}
