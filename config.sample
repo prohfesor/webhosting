@@ -16,3 +16,7 @@ SERVER_CONF_DIR="/etc/apache2/apache2.conf"
 #Server restart command
 SERVER_RESTART="service apache2 restart"
 #SERVER_RESTART="service httpd restart"
+
+#Host enable/disable commands
+HOST_ENABLE="a2ensite"
+HOST_DISABLE="a2dissite"
