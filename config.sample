@@ -10,7 +10,9 @@ CHOWN_HOST="user:group"
 CHMOD_HOST='g+w'
 
 #Server config dir
-SERVER_CONF_DIR="/etc/httpd/conf.d"
+SERVER_CONF_DIR="/etc/apache2/apache2.conf"
+#SERVER_CONF_DIR="/etc/httpd/conf.d"
 
 #Server restart command
-SERVER_RESTART="service httpd restart"
+SERVER_RESTART="service apache2 restart"
+#SERVER_RESTART="service httpd restart"
