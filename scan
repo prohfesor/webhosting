@@ -1,6 +1,12 @@
 #!/bin/bash
 c=${0%/*}/config ; source "$c" ; if [ $? -ne 0 ] ; then echo "Error: no config file $c" 1>&2 ; exit 1 ; fi
 
+# Make sure only root can run our script
+if [[ $EUID -ne 0 ]]; then
+    echo " This script must be run as root" 1>&2
+    exit 1
+fi
+
 #scan for directories
 for DIR in $WEBSITES_DIR/*; do
     if [ -d "${DIR}" ]; then
