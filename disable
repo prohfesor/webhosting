@@ -1,0 +1,20 @@
+#!/bin/bash
+c=${0%/*}/config ; source "$c" ; if [ $? -ne 0 ] ; then echo "Error: no config file $c" 1>&2 ; exit 1 ; fi
+
+if [ -z "$1" ] ; then echo " Usage: disable <host> " ; exit 1 ; fi
+
+# Make sure only root can run our script
+if [[ $EUID -ne 0 ]]; then
+    echo " This script must be run as root" 1>&2
+    exit 1
+fi
+
+HOST=$1;
+
+#try disable
+echo " Disabling: $HOST"
+${HOST_DISABLE} $1
+
+#restart server
+echo " Restart server"
+${SERVER_RESTART}
