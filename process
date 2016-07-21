@@ -37,4 +37,10 @@ fi
 sed -i -e s@"\$HOST"@$HOST@g $SERVER_CONF_FILE
 sed -i -e s@"\$WEBSITES_DIR"@$WEBSITES_DIR@g $SERVER_CONF_FILE
 
+#enable host
+enable $HOST
+
+#add to hosts file
+hosts $HOST
+
 # REMEMBER TO RESTART SERVER !!!
