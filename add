@@ -19,8 +19,7 @@ if [ -d $HOST_DIR ]; then
 fi
 echo " Creating host directory: $HOST_DIR"
 mkdir $HOST_DIR
-
-./process "$1"
+${0%/*}/process "$1"
 
 #restart server
 echo " Restart server"

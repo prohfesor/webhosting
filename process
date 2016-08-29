@@ -13,7 +13,7 @@ HOST=$1;
 HOST_DIR="$WEBSITES_DIR/$HOST"
 
 #copy files to host dir
-cp -Rn ./template/host/* $HOST_DIR/
+cp -Rn ${0%/*}/template/host/* $HOST_DIR/
 
 #fill files contents
 grep -rl "\$HOST" $HOST_DIR | xargs sed -i s@"\$HOST"@$HOST@g
@@ -32,15 +32,15 @@ if [ -f $SERVER_CONF_FILE ]; then
     echo " Server conf $HOST.conf already exists!"
 else
     echo " Adding config to server: $SERVER_CONF_FILE"
-    cp ./template/server/host.conf $SERVER_CONF_FILE
+    cp ${0%/*}/template/server/host.conf $SERVER_CONF_FILE
 fi
 sed -i -e s@"\$HOST"@$HOST@g $SERVER_CONF_FILE
 sed -i -e s@"\$WEBSITES_DIR"@$WEBSITES_DIR@g $SERVER_CONF_FILE
 
 #enable host
-enable $HOST
+${0%/*}/enable $HOST
 
 #add to hosts file
-hosts $HOST
+${0%/*}/hosts $HOST
 
 # REMEMBER TO RESTART SERVER !!!
